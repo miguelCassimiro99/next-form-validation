@@ -1,14 +1,16 @@
 'use client'
 
 import Button from '@/components/Button'
-import { useState } from 'react'
-import { FormProvider, useForm } from 'react-hook-form'
-import { Form } from '../Composition/Index'
 import { BasicInfoFormData, basicInfoFormSchema } from '@/types/schemas'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { FormProvider, useForm } from 'react-hook-form'
+import { useStore } from '../../../store/SignatureForm'
+import { Form } from '../Composition/Index'
 
 export default function BasicInfo() {
-  const [output, setOutput] = useState('')
+  const { setBasicInfo, setBasicInfoFormErrors, setCurrentStep } = useStore(
+    (store) => store.actions
+  )
 
   const basicInfoForm = useForm<BasicInfoFormData>({
     resolver: zodResolver(basicInfoFormSchema),
@@ -17,13 +19,16 @@ export default function BasicInfo() {
 
   const {
     handleSubmit,
-    formState: { isValid, isSubmitting, isLoading, errors },
+    formState: { isValid, isSubmitting, isLoading, errors, touchedFields },
   } = basicInfoForm
 
   function handleBasicInfo(data: any) {
-    console.log('Errors: ')
-    //? If not errors we can go to the other form
-    setOutput(JSON.stringify(data, null, 2))
+    if (errors.email || errors.name || errors.phone)
+      return setBasicInfoFormErrors(true)
+
+    setBasicInfoFormErrors(false)
+    setBasicInfo(data)
+    setCurrentStep(2)
   }
 
   return (
@@ -50,13 +55,15 @@ export default function BasicInfo() {
                 <Form.ErrorMessage field="phone" />
               </Form.Field>
 
-              <Button label="Avancar" />
+              {/* disabled: !data || erros */}
+              <Button
+                label="Avancar"
+                disabled={Object.keys(errors).length > 0}
+              />
             </div>
           </div>
         </form>
       </FormProvider>
-
-      <pre>{output}</pre>
     </div>
   )
 }

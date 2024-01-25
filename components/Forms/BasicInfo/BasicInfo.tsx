@@ -21,7 +21,8 @@ export default function BasicInfo() {
   } = basicInfoForm
 
   function handleBasicInfo(data: any) {
-    console.log(data)
+    console.log('Errors: ')
+    //? If not errors we can go to the other form
     setOutput(JSON.stringify(data, null, 2))
   }
 

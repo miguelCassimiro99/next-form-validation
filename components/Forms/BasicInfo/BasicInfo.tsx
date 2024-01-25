@@ -8,9 +8,11 @@ import { useStore } from '../../../store/SignatureForm'
 import { Form } from '../Composition/Index'
 
 export default function BasicInfo() {
-  const { setBasicInfo, setBasicInfoFormErrors, setCurrentStep } = useStore(
-    (store) => store.actions
-  )
+  const {
+    setBasicInfo,
+    setHasFormErros: setBasicInfoFormErrors,
+    setCurrentStep,
+  } = useStore((store) => store.actions)
 
   const basicInfoForm = useForm<BasicInfoFormData>({
     resolver: zodResolver(basicInfoFormSchema),

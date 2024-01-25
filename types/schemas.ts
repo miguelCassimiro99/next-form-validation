@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { plansList } from '../components/Forms/PlanSelect/PlanSelect'
 
 const phoneRegex = new RegExp(
   /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
@@ -19,3 +20,11 @@ export const basicInfoFormSchema = z.object({
 })
 
 export type BasicInfoFormData = z.infer<typeof basicInfoFormSchema>
+
+export const planSelectFormSchema = z.object({
+  plan: z
+    .string({ invalid_type_error: 'Please select one plan' })
+    .refine((val) => plansList.map((plan) => plan.id).includes(val)),
+})
+
+export type PlanSelectFormData = z.infer<typeof planSelectFormSchema>

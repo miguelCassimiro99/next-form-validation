@@ -5,14 +5,16 @@ type StepsType = 1 | 2 | 3 | 4
 
 interface IState {
   basicInfo: any
-  basicInfoFormErrors: boolean
+  hasFormErros: boolean
+  planSelected: any
   currentStep: StepsType
 }
 
 interface IActions {
   setBasicInfo: (data: any) => void
-  setBasicInfoFormErrors: (errors: any) => void
+  setHasFormErros: (errors: any) => void
   setCurrentStep: (step: StepsType) => void
+  setPlanSelected: (plan: any) => void
 }
 
 interface IStore {
@@ -28,8 +30,9 @@ export const useStore = create<IStore>((set) => {
   return {
     state: {
       basicInfo: initialState,
-      basicInfoFormErrors: true,
+      hasFormErros: true,
       currentStep: 1,
+      planSelected: initialState,
     },
 
     actions: {
@@ -37,9 +40,9 @@ export const useStore = create<IStore>((set) => {
         setState(({ state }: IStore) => {
           state.basicInfo = data
         }),
-      setBasicInfoFormErrors: (hasErrors: boolean) => {
+      setHasFormErros: (hasErrors: boolean) => {
         setState(({ state }: IStore) => {
-          state.basicInfoFormErrors = hasErrors
+          state.hasFormErros = hasErrors
         })
       },
       setCurrentStep: (step: StepsType) => {
@@ -47,6 +50,10 @@ export const useStore = create<IStore>((set) => {
           state.currentStep = step
         })
       },
+      setPlanSelected: (data: any) =>
+        setState(({ state }: IStore) => {
+          state.planSelected = data
+        }),
     },
   }
 })

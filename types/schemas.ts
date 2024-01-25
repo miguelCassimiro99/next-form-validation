@@ -1,5 +1,6 @@
 import { z } from 'zod'
 import { plansList } from '../components/Forms/PlanSelect/PlanSelect'
+import { addOnsList } from '../components/Forms/OptionalAddons/OptionalAddons'
 
 const phoneRegex = new RegExp(
   /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
@@ -28,3 +29,13 @@ export const planSelectFormSchema = z.object({
 })
 
 export type PlanSelectFormData = z.infer<typeof planSelectFormSchema>
+
+export const optionalAddonsFormSchema = z.object({
+  addOn: z
+    .string({ invalid_type_error: 'Invalid add-ons select' })
+    .refine((val) => addOnsList.map((addon) => addon.id).includes(val))
+    .array()
+    .optional(),
+})
+
+export type AddOnsFormData = z.infer<typeof optionalAddonsFormSchema>

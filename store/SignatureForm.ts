@@ -7,6 +7,7 @@ interface IState {
   basicInfo: any
   hasFormErros: boolean
   planSelected: any
+  optionalAddons: any
   currentStep: StepsType
 }
 
@@ -15,6 +16,7 @@ interface IActions {
   setHasFormErros: (errors: any) => void
   setCurrentStep: (step: StepsType) => void
   setPlanSelected: (plan: any) => void
+  setOptionalAddons: (data: any) => void
 }
 
 interface IStore {
@@ -33,6 +35,7 @@ export const useStore = create<IStore>((set) => {
       hasFormErros: true,
       currentStep: 1,
       planSelected: initialState,
+      optionalAddons: initialState,
     },
 
     actions: {
@@ -53,6 +56,10 @@ export const useStore = create<IStore>((set) => {
       setPlanSelected: (data: any) =>
         setState(({ state }: IStore) => {
           state.planSelected = data
+        }),
+      setOptionalAddons: (data: any) =>
+        setState(({ state }: IStore) => {
+          state.optionalAddons = data
         }),
     },
   }

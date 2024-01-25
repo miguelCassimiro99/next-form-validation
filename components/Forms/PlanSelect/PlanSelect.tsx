@@ -41,11 +41,8 @@ export default function PlanSelect() {
     formState: { errors },
   } = planSelectForm
 
-  console.log(errors)
-
   function handleFormSelect(data: any) {
-    //setPlanSelected(data)
-    console.log(data)
+    setPlanSelected(data)
     setCurrentStep(3)
   }
 

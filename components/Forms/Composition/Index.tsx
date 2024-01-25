@@ -1,3 +1,4 @@
+import Checkbox from './Checkbox'
 import ErrorMessage from './ErrorMessage'
 import Field from './Field'
 import Input from './Input'
@@ -10,4 +11,5 @@ export const Form = {
   Label,
   ErrorMessage,
   Radio,
+  Checkbox,
 }

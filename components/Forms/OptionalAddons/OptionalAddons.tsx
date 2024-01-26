@@ -1,10 +1,9 @@
 import Button from '@/components/Button'
-import { useStore } from '@/store/SignatureForm'
+import { useStore } from '@/store/signature-form'
 import { AddOnsFormData, optionalAddonsFormSchema } from '@/types/schemas'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useForm } from 'react-hook-form'
 import { Form } from '../Composition/Index'
-import Checkbox from '../Composition/Checkbox'
 
 export const addOnsList = [
   {
@@ -45,21 +44,31 @@ export default function OptionalAddons() {
   function handleFormSelect(data: any) {
     if (errors.addOn) return setHasFormErros(true)
 
+    setHasFormErros(false)
     setOptionalAddons(data)
     setCurrentStep(4)
   }
 
   return (
-    <>
+    <div className="w-full md:max-w-sm lg:max-w-md">
       <FormProvider {...optionalAddonsForm}>
         <form
           onSubmit={handleSubmit(handleFormSelect)}
-          className="flex flex-col gap-2 w-full">
+          className="flex flex-col gap-2 w-full py-4 md:py-6">
+          <h2 className="text-2xl font-semibold md:font-bold text-gray-200 mb-4">
+            Select your plan
+          </h2>
+
+          <p className="text-sm text-gray-300 mb-4 max-w-xs">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+
           {addOnsList.map((addon) => (
             <div
               key={addon.id}
-              className="flex p-3 bg-slate-300 rounded-[8px] justify-between items-center gap-4">
-              <Form.Checkbox name="addOn" id={addon.name} />
+              className="flex p-3 bg-slate-100 rounded-[8px] justify-between items-center gap-4">
+              <Form.Checkbox name="addOn" id={addon.name} value={addon.id} />
               <Form.ErrorMessage field={addon.name} />
               <Form.Label
                 htmlFor={addon.name}
@@ -74,10 +83,9 @@ export default function OptionalAddons() {
               </Form.Label>
             </div>
           ))}
-
-          <Button label="Avancar" className="w-fit ml-auto" />
+          <Button label="Próximo" className="w-fit ml-auto mt-4" />
         </form>
       </FormProvider>
-    </>
+    </div>
   )
 }

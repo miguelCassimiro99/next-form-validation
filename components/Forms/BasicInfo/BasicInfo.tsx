@@ -4,7 +4,7 @@ import Button from '@/components/Button'
 import { BasicInfoFormData, basicInfoFormSchema } from '@/types/schemas'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useForm } from 'react-hook-form'
-import { useStore } from '../../../store/SignatureForm'
+import { useStore } from '../../../store/signature-form'
 import { Form } from '../Composition/Index'
 
 export default function BasicInfo() {
@@ -14,14 +14,17 @@ export default function BasicInfo() {
     setCurrentStep,
   } = useStore((store) => store.actions)
 
+  const { basicInfo } = useStore((store) => store.state)
+
   const basicInfoForm = useForm<BasicInfoFormData>({
     resolver: zodResolver(basicInfoFormSchema),
     mode: 'all',
+    defaultValues: basicInfo,
   })
 
   const {
     handleSubmit,
-    formState: { isValid, isSubmitting, isLoading, errors, touchedFields },
+    formState: { errors },
   } = basicInfoForm
 
   function handleBasicInfo(data: any) {
@@ -34,7 +37,7 @@ export default function BasicInfo() {
   }
 
   return (
-    <div className="w-full md: max-w-sm lg:max-w-md">
+    <div className="w-full md:max-w-sm lg:max-w-md">
       <FormProvider {...basicInfoForm}>
         <form
           onSubmit={handleSubmit(handleBasicInfo)}
@@ -71,7 +74,7 @@ export default function BasicInfo() {
               {/* disabled: !data || erros */}
               <Button
                 label="Próximo"
-                className="ml-auto"
+                className="ml-auto mt-4"
                 disabled={Object.keys(errors).length > 0}
               />
             </div>

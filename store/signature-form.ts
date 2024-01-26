@@ -1,10 +1,11 @@
 import { create } from 'zustand'
 import { produce } from 'immer'
+import { basicInfoType } from '@/types/signature-form'
 
-type StepsType = 1 | 2 | 3 | 4
+type StepsType = 1 | 2 | 3 | 4 | number
 
 interface IState {
-  basicInfo: any
+  basicInfo: basicInfoType
   hasFormErros: boolean
   planSelected: any
   optionalAddons: any
@@ -31,7 +32,11 @@ export const useStore = create<IStore>((set) => {
 
   return {
     state: {
-      basicInfo: initialState,
+      basicInfo: {
+        name: '',
+        email: '',
+        phone: '',
+      },
       hasFormErros: true,
       currentStep: 1,
       planSelected: initialState,
@@ -39,7 +44,7 @@ export const useStore = create<IStore>((set) => {
     },
 
     actions: {
-      setBasicInfo: (data: any) =>
+      setBasicInfo: (data: basicInfoType) =>
         setState(({ state }: IStore) => {
           state.basicInfo = data
         }),

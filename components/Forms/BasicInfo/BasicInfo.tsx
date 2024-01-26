@@ -34,24 +34,35 @@ export default function BasicInfo() {
   }
 
   return (
-    <div>
+    <div className="w-full md: max-w-sm lg:max-w-md">
       <FormProvider {...basicInfoForm}>
-        <form onSubmit={handleSubmit(handleBasicInfo)}>
-          <div className="flex flex-col items-center justify-start gap-y-4 md:items-strech">
+        <form
+          onSubmit={handleSubmit(handleBasicInfo)}
+          className="py-4 md:py-6 overflow-hidden max-w-md">
+          <h2 className="text-2xl font-semibold md:font-bold text-gray-200 mb-4">
+            Personal Info
+          </h2>
+
+          <p className="text-sm text-gray-300 mb-4 max-w-xs">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+
+          <div className="flex flex-col items-center justify-start gap-y-4">
             <div className="flex flex-col justify-start items-start w-full gap-4">
-              <Form.Field>
+              <Form.Field className="w-full">
                 <Form.Label htmlFor="name">Name</Form.Label>
                 <Form.Input type="text" name="name" />
                 <Form.ErrorMessage field="name" />
               </Form.Field>
 
-              <Form.Field>
+              <Form.Field className="w-full">
                 <Form.Label htmlFor="phone">E-mail</Form.Label>
                 <Form.Input type="text" name="email" />
                 <Form.ErrorMessage field="email" />
               </Form.Field>
 
-              <Form.Field>
+              <Form.Field className="w-full">
                 <Form.Label htmlFor="phone">Phone</Form.Label>
                 <Form.Input type="text" name="phone" />
                 <Form.ErrorMessage field="phone" />
@@ -59,7 +70,8 @@ export default function BasicInfo() {
 
               {/* disabled: !data || erros */}
               <Button
-                label="Avancar"
+                label="Próximo"
+                className="ml-auto"
                 disabled={Object.keys(errors).length > 0}
               />
             </div>

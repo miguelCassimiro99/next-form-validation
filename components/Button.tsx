@@ -31,8 +31,8 @@ const sizeClasses = {
 }
 
 const themeClasses = {
-  primary: 'bg-orange-600 hover:bg-orange-700 focus:ring-orange-500 text-white',
-  accent: 'bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 text-white',
+  primary: 'bg-amber-500 hover:bg-amber-400 focus:ring-amber-600 text-white',
+  accent: 'bg-indigo-400 hover:bg-indigo-700 focus:ring-indigo-500 text-white',
   secondary:
     'bg-white hover:bg-slate-100 focus:ring-indigo-500 border border-slate-300 text-gray-600',
   light:
@@ -54,7 +54,7 @@ export default function Button({
   ...props
 }: IButton) {
   const classes = classnames(
-    'inline-flex items-center px-4 py-2 border border-transparent font-medium rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2',
+    'inline-flex items-center px-4 py-2 border border-transparent font-medium rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 transition-all',
     sizeClasses[size || 'md'],
     colors || themeClasses[theme || 'secondary'],
     className,

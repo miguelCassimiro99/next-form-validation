@@ -31,7 +31,9 @@ export default function ConfirmSignature() {
     })
   })
 
-  total += addOnsSelecteds.reduce((sum, item) => sum + item.price, 0)
+  total += parseFloat(
+    addOnsSelecteds.reduce((sum, item) => sum + item.price, 0).toFixed(2)
+  )
 
   return (
     <div className="w-full md:max-w-sm lg:max-w-md">

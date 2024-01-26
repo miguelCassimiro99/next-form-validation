@@ -1,13 +1,14 @@
 import { create } from 'zustand'
 import { produce } from 'immer'
+import { basicInfoType, planSelectedType } from '@/types/signature-form'
 
-type StepsType = 1 | 2 | 3 | 4
+type StepsType = 1 | 2 | 3 | 4 | number
 
 interface IState {
-  basicInfo: any
   hasFormErros: boolean
-  planSelected: any
-  optionalAddons: any
+  basicInfo: basicInfoType
+  planSelected: planSelectedType
+  optionalAddons: string[]
   currentStep: StepsType
 }
 
@@ -31,15 +32,21 @@ export const useStore = create<IStore>((set) => {
 
   return {
     state: {
-      basicInfo: initialState,
+      basicInfo: {
+        name: '',
+        email: '',
+        phone: '',
+      },
       hasFormErros: true,
       currentStep: 1,
-      planSelected: initialState,
-      optionalAddons: initialState,
+      planSelected: {
+        plan: 'ARC',
+      },
+      optionalAddons: [''],
     },
 
     actions: {
-      setBasicInfo: (data: any) =>
+      setBasicInfo: (data: basicInfoType) =>
         setState(({ state }: IStore) => {
           state.basicInfo = data
         }),
@@ -53,13 +60,15 @@ export const useStore = create<IStore>((set) => {
           state.currentStep = step
         })
       },
-      setPlanSelected: (data: any) =>
+      setPlanSelected: (data: planSelectedType) =>
         setState(({ state }: IStore) => {
           state.planSelected = data
         }),
-      setOptionalAddons: (data: any) =>
+      setOptionalAddons: (data) =>
         setState(({ state }: IStore) => {
+          console.log(data)
           state.optionalAddons = data
+          console.log(state.optionalAddons)
         }),
     },
   }

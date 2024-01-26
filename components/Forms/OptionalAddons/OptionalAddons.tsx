@@ -31,9 +31,14 @@ export default function OptionalAddons() {
     (store) => store.actions
   )
 
+  const { optionalAddons } = useStore((store) => store.state)
+
   const optionalAddonsForm = useForm<AddOnsFormData>({
     resolver: zodResolver(optionalAddonsFormSchema),
     mode: 'all',
+    defaultValues: {
+      addOn: optionalAddons,
+    },
   })
 
   const {
@@ -44,8 +49,8 @@ export default function OptionalAddons() {
   function handleFormSelect(data: any) {
     if (errors.addOn) return setHasFormErros(true)
 
-    setHasFormErros(false)
     setOptionalAddons(data)
+    setHasFormErros(false)
     setCurrentStep(4)
   }
 

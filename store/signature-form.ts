@@ -8,7 +8,7 @@ interface IState {
   hasFormErros: boolean
   basicInfo: basicInfoType
   planSelected: planSelectedType
-  optionalAddons: any
+  optionalAddons: string[]
   currentStep: StepsType
 }
 
@@ -42,7 +42,7 @@ export const useStore = create<IStore>((set) => {
       planSelected: {
         plan: 'ARC',
       },
-      optionalAddons: initialState,
+      optionalAddons: [''],
     },
 
     actions: {
@@ -64,9 +64,11 @@ export const useStore = create<IStore>((set) => {
         setState(({ state }: IStore) => {
           state.planSelected = data
         }),
-      setOptionalAddons: (data: any) =>
+      setOptionalAddons: (data) =>
         setState(({ state }: IStore) => {
+          console.log(data)
           state.optionalAddons = data
+          console.log(state.optionalAddons)
         }),
     },
   }

@@ -54,7 +54,7 @@ export default function Button({
   ...props
 }: IButton) {
   const classes = classnames(
-    'inline-flex items-center px-4 py-2 border border-transparent font-medium rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 transition-all',
+    'inline-flex justify-center items-center px-4 py-2 border border-transparent font-medium rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 transition-all',
     sizeClasses[size || 'md'],
     colors || themeClasses[theme || 'secondary'],
     className,

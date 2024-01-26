@@ -8,7 +8,7 @@ interface IState {
   hasFormErros: boolean
   basicInfo: basicInfoType
   planSelected: planSelectedType
-  optionalAddons: string[]
+  optionalAddons: any
   currentStep: StepsType
 }
 

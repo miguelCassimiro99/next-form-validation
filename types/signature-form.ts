@@ -3,3 +3,7 @@ export type basicInfoType = {
   email: string
   phone: string
 }
+
+export type planSelectedType = {
+  plan: string
+}

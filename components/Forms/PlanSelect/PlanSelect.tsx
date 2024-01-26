@@ -28,11 +28,13 @@ export default function PlanSelect() {
     (store) => store.actions
   )
 
+  const { planSelected } = useStore((store) => store.state)
+
   const planSelectForm = useForm<PlanSelectFormData>({
     resolver: zodResolver(planSelectFormSchema),
     mode: 'all',
     defaultValues: {
-      plan: plansList[0].id,
+      ...planSelected,
     },
   })
 

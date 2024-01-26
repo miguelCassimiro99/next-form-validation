@@ -26,7 +26,7 @@ export default function ConfirmSignature() {
   let total = seletedPlan.price
 
   addOnsList.forEach((addon) => {
-    optionalAddons.addOn.forEach((opt) => {
+    optionalAddons.addOn.forEach((opt: any) => {
       if (addon.id == opt) addOnsSelecteds.push(addon)
     })
   })
